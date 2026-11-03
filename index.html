@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#ffe8f2"><title>Zohuu's Little Universe ✨</title>
+<meta name="theme-color" content="#ffe8f2"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link id="birthdayFonts" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&family=Quicksand:wght@400;500;600;700&family=Pacifico&display=swap" disabled><title>Zohuu's Little Universe ✨</title>
 <style>
 :root{--pink:#ff77aa;--deep:#b8497b;--ink:#65364e;--lilac:#c9b7ff}
 *{box-sizing:border-box}body{margin:0;color:var(--ink);font-family:'Trebuchet MS',ui-rounded,system-ui,sans-serif;background:radial-gradient(circle at 15% 10%,#fff 0 4%,transparent 30%),linear-gradient(145deg,#ffe6f1,#f0e9ff 60%,#fff0dc);min-height:100vh}
@@ -16,6 +16,7 @@ input{border:1px solid #efbfd4;border-radius:99px;padding:13px 16px;font:inherit
 .envelope{font-size:6rem;cursor:pointer;display:inline-block;transition:.3s}.envelope:hover{transform:translateY(-5px) rotate(-4deg)}.letter{background:#fff9fc;border:1px dashed #e7a0c0;border-radius:18px;padding:18px;line-height:1.8;white-space:pre-line;text-align:left}
 .board{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;max-width:340px;margin:18px auto}.piece{aspect-ratio:1;border:1px solid #f1bfd5;border-radius:17px;background:linear-gradient(145deg,#fff,#ffe8f2);font-size:clamp(1.4rem,6vw,2.3rem);cursor:pointer;color:#bd5a88}.piece.selected{outline:3px solid #bd91ef;background:#f5edff}.piece.blank{background:#f8edf4;border-style:dashed}.cake{font-size:6rem;animation:bob 1.8s ease-in-out infinite}@keyframes bob{50%{transform:translateY(-8px)}}.scrap{display:grid;grid-template-columns:repeat(2,1fr);gap:11px}.note{background:linear-gradient(140deg,#fff0f6,#f0eaff);border:1px solid white;border-radius:20px;padding:19px;text-align:center;min-height:120px}.note b{display:block;color:#ae4e7b;margin:6px}.hidden{display:none!important}footer{text-align:center;color:#a16a85;font-size:.8rem;padding:20px}
 @media(max-width:380px){.unit{min-width:58px}.scrap{grid-template-columns:1fr 1fr}}
+body.birthday-mode{font-family:'Nunito',sans-serif}body.birthday-mode .hero h1,body.birthday-mode h2{font-family:'Pacifico',cursive;font-weight:400;line-height:1.25}body.birthday-mode .letter,body.birthday-mode .note,body.birthday-mode p{font-family:'Quicksand','Nunito',sans-serif}body.birthday-mode .btn{font-family:'Nunito',sans-serif}
 </style></head>
 <body><div id="sky"></div><main>
 <header class="hero"><div class="eyebrow">૮ ˶ᵔ ᵕ ᵔ˶ ა made with lots of care</div><h1>Zohuu's Little<br>Universe 🎀</h1><p>A tiny corner full of soft wishes, happy thoughts, little stars and lots of duas — just for your special day! ♡</p></header>
@@ -25,27 +26,33 @@ input{border:1px solid #efbfd4;border-radius:99px;padding:13px 16px;font:inherit
   <div class="center"><input id="pass" type="password" placeholder="Enter the secret code" autocomplete="off"><br><button class="btn" onclick="unlock()">Unlock the universe ✨</button><p id="passmsg" class="muted">Hint: a tiny four-digit secret 🤫</p></div>
  </section>
  <section class="screen" id="s2">
-  <div class="big">🌙</div><h2>Welcome, Zohuu!</h2><p class="center">Yayyy, you made it! 🌷 This little universe has tiny surprises, sweet wishes, sweet wishes and heartfelt duas for the year ahead. Take your time and enjoy every little thing! ♡</p>
+  <div class="big">🌙</div><h2>Welcome, Zohuu!</h2><p class="center">Yayyy, you made it! 🌷 This little universe has tiny surprises, heartfelt wishes and duas for the year ahead. Take your time and enjoy every little thing! ♡</p>
   <div class="center"><span class="pill">💗 your little universe awaits 💗</span><br><button class="btn" onclick="show(3)">Let's explore</button></div>
  </section>
  <section class="screen" id="s3">
   <h2>Tick-tock, birthday girl! 🎂</h2><p class="center muted">Just a little countdown until your day fills the calendar with extra sparkle! 💗</p>
   <div class="count"><div class="unit"><b id="days">--</b><small>DAYS</small></div><div class="unit"><b id="hours">--</b><small>HOURS</small></div><div class="unit"><b id="mins">--</b><small>MINUTES</small></div><div class="unit"><b id="secs">--</b><small>SECONDS</small></div></div>
-  <p class="center" id="countlabel">Until November 19 ✨</p><div class="center"><button class="btn" onclick="show(4)">Open your little letter</button></div>
+  <p class="center" id="countlabel">Until November 19 ✨</p><p class="center muted" id="lockednote">Your birthday surprises will open right here when your day begins. ♡</p><div class="center"><button class="btn" id="birthdayOpen" onclick="show(4)" disabled>Open your birthday surprise 🎀</button></div>
  </section>
  <section class="screen" id="s4">
   <h2>A little note for you 💌</h2><div class="center"><div class="envelope" onclick="document.getElementById('letter').classList.toggle('hidden')" aria-label="Open or close letter">💌</div><p class="muted">Tap the little envelope to open your letter. ♡</p></div>
-  <div class="letter hidden" id="letter">Hiii Zohuu! 🎀
+  <div class="letter hidden" id="letter">HAPPIEST BIRTHDAYYYY, ZOHUUUU! 🎀💗
 
-Okayyy, first of all — I hope your day is as lovely, soft and full of smiles as you deserve! You are one of those people who make ordinary moments feel a little more special. So here's a tiny bundle of good wishes, wrapped with lots of care. 🧸💗
+Aaaaa, finally your day is hereee! 🥹🌷 I hope today brings you the kind of happiness that stays in your heart long after the candles are blown out. May your day be filled with little surprises, genuine smiles, warm moments and all the love and kindness you deserve. You deserve a year that feels lighter, brighter and full of beautiful beginnings. 🧸✨
 
-May Allah bless you with good health, a heart full of sukoon and days filled with genuine happiness. May He protect you from every difficulty, make the hard things easy, guide you towards what is best and place barakah in every step you take.
+And now, a heartfelt dua for you...
 
-May Allah accept your duas, open beautiful doors of opportunity for you, keep kind people around you and grant you success in this life and the hereafter. May your worries become lighter, your hopes grow brighter and your smile always find a reason to return.
+May Allah bless you with a long, healthy and peaceful life, filled with imaan, happiness and endless khair. May He protect you from every hardship, every hidden difficulty and every sadness that your heart never speaks about. May Allah replace every worry with sukoon, every difficult chapter with ease, and every disappointment with something far better than you imagined.
 
-Ameen ya Rabb! 🤍
+May Allah accept every sincere dua you make, even the ones you cannot put into words. May He guide every decision you take, make the right paths clear for you, open doors of halal rizq, success and beautiful opportunities, and place abundant barakah in your time, efforts, dreams and future. May He bless you with good health, confidence, strength, beneficial knowledge and people whose presence brings peace to your life.
 
-Keep being your sweet, unique self. Wishing you the happiest birthday, Zohuu! 🌷✨</div>
+May Allah keep your heart soft but strong, your intentions pure, your faith steady and your smile genuine. May He keep you safe wherever you go, grant you ease in what feels difficult, give you patience when things take time, and bless you with surprises that are better than anything you have been hoping for. May He grant you the best in this duniya and the best in the akhirah, and reunite you with all that is good for you.
+
+May this new year of your life be full of answered duas, peaceful mornings, happy memories, meaningful achievements and countless reasons to say Alhamdulillah.
+
+Ameen summa Ameen, ya Rabbal Aalameen. 🤍
+
+Keep shining in your own little way, Zohuu. I hope you always find reasons to smile. Happiest birthday once againnn! 🎂🌸</div>
   <div class="center"><button class="btn" onclick="show(5)">More little wishes</button></div>
  </section>
  <section class="screen" id="s5">
@@ -57,13 +64,13 @@ Keep being your sweet, unique self. Wishing you the happiest birthday, Zohuu! �
   <div class="center"><div class="cake">🎂</div><h2>One last dua, birthday star! 🎀</h2><p>May Allah write ease after every difficulty, happiness after every worry and beautiful surprises in places you least expect. May He accept every sincere dua you make and bless you with what is best. Ameen! 🤍</p><span class="pill">A whole year of khair, barakah & smiles for you 💗</span><br><button class="btn alt" onclick="show(1)">Experience it again</button></div>
  </section>
 </section>
-<audio id="bgSong" src="aarzu.mp3" loop preload="auto"></audio><p id="musicFallback" class="muted center" style="font-size:.78rem"></p>
+<audio id="bgSong" src="aarzu.mp3" preload="auto"></audio><p id="musicFallback" class="muted center" style="font-size:.78rem"></p>
 <footer>made with lots of duas & a sprinkle of sparkle ♡ · Zohuu's Little Universe</footer>
 </main>
 <script>
 const SKY=document.getElementById('sky');['✦','♡','✧','🌸','⋆'].forEach((v,j)=>{for(let i=0;i<5;i++){let e=document.createElement('span');e.className='float';e.textContent=v;e.style.left=Math.random()*100+'%';e.style.top=(60+Math.random()*70)+'%';e.style.animationDelay=(-Math.random()*10)+'s';e.style.animationDuration=(8+Math.random()*9)+'s';e.style.fontSize=(13+Math.random()*15)+'px';SKY.append(e)}});
-function show(n){document.querySelectorAll('.screen').forEach(e=>e.classList.remove('on'));document.getElementById('s'+n).classList.add('on');window.scrollTo({top:0,behavior:'smooth'})}
-function unlock(){let v=document.getElementById('pass').value.trim();if(v==='1919'){show(2);document.getElementById('passmsg').textContent='Unlocked with a little sparkle ✨';let a=document.getElementById('bgSong');a.volume=0.65;a.play().catch(()=>{document.getElementById('musicFallback').textContent='Your browser blocked automatic sound. Tap anywhere on the page once to start the birthday song. ♡';let start=()=>{a.play().catch(()=>{});document.removeEventListener('click',start);document.removeEventListener('touchstart',start)};document.addEventListener('click',start,{once:true});document.addEventListener('touchstart',start,{once:true})})}else document.getElementById('passmsg').textContent='Not quite! Hint: a tiny four-digit secret 🤫'}
-const target=new Date(2026,10,19,0,0,0);function tick(){let d=target-new Date();if(d<0){document.getElementById('countlabel').textContent='Today is your special day! Happy Birthday! 🎂';['days','hours','mins','secs'].forEach(x=>document.getElementById(x).textContent='0');return}let vals=[Math.floor(d/86400000),Math.floor(d/3600000)%24,Math.floor(d/60000)%60,Math.floor(d/1000)%60];['days','hours','mins','secs'].forEach((x,i)=>document.getElementById(x).textContent=String(vals[i]).padStart(2,'0'))}tick();setInterval(tick,1000);
+function show(n){if(n>=4&&!birthdayUnlocked){show(3);return}document.querySelectorAll('.screen').forEach(e=>e.classList.remove('on'));document.getElementById('s'+n).classList.add('on');window.scrollTo({top:0,behavior:'smooth'})}
+function unlock(){let v=document.getElementById('pass').value.trim();if(v==='1919'){show(2);document.getElementById('passmsg').textContent='Unlocked with a little sparkle ✨';let a=document.getElementById('bgSong');a.volume=0.65;let startSong=()=>{a.currentTime=164;a.play().catch(()=>{document.getElementById('musicFallback').textContent='Your browser blocked automatic sound. Tap anywhere on the page once to start the birthday song. ♡';let start=()=>{a.currentTime=164;a.play().catch(()=>{});document.removeEventListener('click',start);document.removeEventListener('touchstart',start)};document.addEventListener('click',start,{once:true});document.addEventListener('touchstart',start,{once:true})})};if(a.readyState>=1){startSong()}else{a.addEventListener('loadedmetadata',startSong,{once:true})}a.addEventListener('ended',()=>{a.currentTime=164;a.play().catch(()=>{})})}else document.getElementById('passmsg').textContent='Not quite! Hint: a tiny four-digit secret 🤫'}
+const target=new Date(2026,10,19,0,0,0);let birthdayUnlocked=false;function tick(){let d=target-new Date();if(d<=0){birthdayUnlocked=true;document.body.classList.add('birthday-mode');document.getElementById('birthdayFonts').disabled=false;document.getElementById('countlabel').textContent='Today is your special day! Happiest Birthday, Zohuu! 🎂';document.getElementById('lockednote').textContent='Your little birthday universe is readyyy! 💗';document.getElementById('birthdayOpen').disabled=false;['days','hours','mins','secs'].forEach(x=>document.getElementById(x).textContent='0');return}let vals=[Math.floor(d/86400000),Math.floor(d/3600000)%24,Math.floor(d/60000)%60,Math.floor(d/1000)%60];['days','hours','mins','secs'].forEach((x,i)=>document.getElementById(x).textContent=String(vals[i]).padStart(2,'0'))}tick();setInterval(tick,1000);
 function party(){for(let i=0;i<55;i++){let e=document.createElement('span');e.textContent=['💗','✨','🎉','🌸'][i%4];e.style.cssText='position:fixed;top:-30px;left:'+Math.random()*100+'vw;font-size:22px;z-index:9;transition:transform 2.5s,opacity 2.5s';document.body.append(e);requestAnimationFrame(()=>{e.style.transform='translateY(110vh) rotate(500deg)';e.style.opacity=0});setTimeout(()=>e.remove(),2600)}}
 </script></body></html>
