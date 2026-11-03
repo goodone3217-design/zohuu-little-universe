@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#ffe8f2">
+<title>Zohuu's Little Universe ✨</title>
+<style>
+:root{--pink:#ff7eae;--rose:#d94f86;--cream:#fff9fc;--ink:#65364e;--lilac:#c9b7ff}
+*{box-sizing:border-box} body{margin:0;font-family:ui-rounded,"Trebuchet MS",system-ui,sans-serif;color:var(--ink);background:radial-gradient(circle at 15% 10%,#fff 0 5%,transparent 28%),linear-gradient(145deg,#ffe5f0,#f4eaff 55%,#fff2df);min-height:100vh;overflow-x:hidden}
+#sky{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:0}.spark{position:absolute;animation:float 9s linear infinite;opacity:.65}@keyframes float{from{transform:translateY(105vh) rotate(0)}to{transform:translateY(-15vh) rotate(300deg)}}
+main{position:relative;z-index:1;max-width:760px;margin:auto;padding:22px 16px 50px}.top{text-align:center;padding:18px 8px 8px}.eyebrow{letter-spacing:.18em;text-transform:uppercase;font-size:.72rem;color:#a45c80}.brand{font-family:Georgia,serif;font-size:clamp(2.1rem,8vw,4.2rem);line-height:1.02;margin:12px 0;color:#bd4e80;text-shadow:0 3px #fff}.subtitle{margin:0 auto;max-width:480px;color:#87536d}
+.card{background:#ffffffc9;border:1px solid #fff;box-shadow:0 18px 55px #bd6c9730;border-radius:28px;padding:clamp(20px,5vw,34px);margin:18px auto;backdrop-filter:blur(10px)}
+.page{display:none}.page.active{display:block;animation:appear .55s ease}@keyframes appear{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+h2{font-family:Georgia,serif;color:#b94b7d;font-size:clamp(1.65rem,5vw,2.3rem);margin:0 0 12px;text-align:center}
+p{line-height:1.7}.center{text-align:center}.big-icon{font-size:4.5rem;text-align:center;margin:8px}.btn{border:0;border-radius:999px;background:linear-gradient(100deg,#ff80ad,#c68cff);color:white;padding:13px 22px;font-weight:800;font-size:1rem;box-shadow:0 8px 18px #ce6e9b40;cursor:pointer;margin:8px 4px}.btn.secondary{background:#fff;color:#b94b7d;border:1px solid #f3c4d8;box-shadow:none}.btn:active{transform:scale(.97)}
+.pill{display:inline-block;background:#fff0f6;border:1px solid #ffd0e2;border-radius:99px;padding:7px 12px;font-size:.8rem;color:#a64f78}
+.progress{height:7px;background:#f7dbe8;border-radius:99px;overflow:hidden;margin:10px 0 22px}.progress span{display:block;height:100%;width:20%;background:linear-gradient(90deg,#ff82b2,#c89aff);transition:width .4s}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;max-width:390px;margin:18px auto}.tile{aspect-ratio:1;border:1px solid #f7c5dc;background:linear-gradient(145deg,#fff,#ffe4f0);border-radius:18px;font-size:2rem;cursor:pointer}.tile.done{background:#f1eaff;border-color:#c9b7ff}
+.letter{background:#fffafc;border:1px dashed #eaa2c2;border-radius:18px;padding:20px;line-height:1.8;white-space:pre-line}
+.cake{font-size:6rem;filter:drop-shadow(0 8px 8px #d78aaa45);animation:bob 2s ease-in-out infinite}@keyframes bob{50%{transform:translateY(-9px)}}
+.gallery{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.memory{min-height:120px;border-radius:20px;padding:18px;background:linear-gradient(140deg,#fff0f6,#f1eaff);display:grid;place-items:center;text-align:center;border:1px solid white}.memory b{display:block;color:#ad4c7a}
+footer{text-align:center;color:#a16a85;font-size:.8rem;padding:18px}
+input[type=file]{max-width:100%;font-size:.85rem}
+@media(max-width:420px){.gallery{grid-template-columns:1fr 1fr}.tile{font-size:1.6rem}}
+</style>
+</head>
+<body>
+<div id="sky"></div>
+<main>
+<header class="top">
+ <div class="eyebrow">a tiny universe made with care</div>
+ <h1 class="brand">Zohuu's Little<br>Universe ✨</h1>
+ <p class="subtitle">A little world of wishes, sparkles and happy surprises — made just for your special day.</p>
+</header>
+<section class="card">
+ <div class="progress"><span id="progress"></span></div>
+ <section class="page active" id="p1">
+  <div class="big-icon">💌</div><h2>A little letter found you!</h2>
+  <p class="center">Somewhere between the stars, a tiny surprise was waiting to be opened. Ready to explore?</p>
+  <div class="center"><span class="pill">✨ invitation for Zohuu ✨</span><br><button class="btn" onclick="go(2)">Open my surprise</button></div>
+ </section>
+ <section class="page" id="p2">
+  <h2>Unlock a little magic 🧩</h2><p class="center">Tap the three hidden stars in the tiles to reveal the next page.</p>
+  <div class="grid" id="tiles"></div><p class="center" id="puzzleMsg">Stars found: 0 / 3</p>
+  <div class="center"><button class="btn secondary" onclick="shuffleTiles()">Try again</button></div>
+ </section>
+ <section class="page" id="p3">
+  <div class="center"><div class="cake">🎂</div><h2>Make a wish, Zohuu!</h2><p>May your day be filled with gentle surprises, laughter and all the little things that make you happy.</p><button class="btn" onclick="confetti();go(4)">Let the celebration begin ✨</button></div>
+ </section>
+ <section class="page" id="p4">
+  <h2>A wish from the heart 🌙</h2>
+  <div class="letter">Dear Zohuu,
+
+May Allah bless you with good health, a peaceful heart and endless reasons to smile. May He make your difficult days easier, guide you towards what is best, protect you from worries and fill the year ahead with barakah.
+
+May every sincere dua find its beautiful answer at the right time. Keep shining in your own way.
+
+Happy Birthday, Zohuu! 🎀</div>
+  <div class="center"><button class="btn" onclick="go(5)">Explore your little memories</button></div>
+ </section>
+ <section class="page" id="p5">
+  <h2>Little things, big smiles 💗</h2><p class="center">A photo-free scrapbook, filled with tiny reminders to celebrate you.</p>
+  <div class="gallery">
+   <div class="memory"><div>🌷<b>Soft days</b><small>May life be gentle with you</small></div></div>
+   <div class="memory"><div>🌟<b>Bright dreams</b><small>May your hopes keep growing</small></div></div>
+   <div class="memory"><div>🧸<b>Happy moments</b><small>More laughter, always</small></div></div>
+   <div class="memory"><div>🕊️<b>Peaceful heart</b><small>May calm find you often</small></div></div>
+  </div>
+  <div class="center"><button class="btn" onclick="go(6)">One last surprise</button></div>
+ </section>
+ <section class="page" id="p6">
+  <div class="big-icon">🌌</div><h2>You're a whole little universe</h2>
+  <p class="center">And this tiny corner of the internet is here to remind you that your presence deserves to be celebrated. Have the loveliest year ahead, Zohuu. 💗</p>
+  <div class="center"><span class="pill">made with care · just for you</span><br><button class="btn secondary" onclick="go(1)">Start the journey again</button></div>
+ </section>
+</section>
+<section class="card center">
+ <h2>Choose a song 🎵</h2><p>To keep the website photo-free and easy to share, add an audio file you have permission to use. It plays only after you choose it.</p>
+ <input id="songFile" type="file" accept="audio/*"><br><button class="btn secondary" onclick="toggleMusic()">Play / pause</button>
+ <audio id="audio" loop></audio><p id="musicStatus" class="subtitle">No song selected yet.</p>
+</section>
+<footer>Made with ♡ · Zohuu's Little Universe</footer>
+</main>
+<script>
+const sky=document.getElementById('sky');const symbols=['✦','♡','✧','🌸','⋆'];for(let i=0;i<28;i++){let s=document.createElement('span');s.className='spark';s.textContent=symbols[i%symbols.length];s.style.left=Math.random()*100+'%';s.style.animationDelay=(-Math.random()*9)+'s';s.style.animationDuration=(7+Math.random()*8)+'s';s.style.fontSize=(12+Math.random()*17)+'px';sky.appendChild(s)}
+let current=1,found=new Set();function go(n){document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));document.getElementById('p'+n).classList.add('active');current=n;document.getElementById('progress').style.width=(n/6*100)+'%';window.scrollTo({top:0,behavior:'smooth'})}
+function shuffleTiles(){found.clear();let box=document.getElementById('tiles');box.innerHTML='';let stars=[1,4,7];for(let i=0;i<9;i++){let b=document.createElement('button');b.className='tile';b.textContent='✧';b.setAttribute('aria-label','mystery tile');b.onclick=()=>{if(b.disabled)return;if(stars.includes(i)){b.textContent='⭐';b.classList.add('done');found.add(i)}else{b.textContent='♡';b.classList.add('done')}b.disabled=true;document.getElementById('puzzleMsg').textContent='Stars found: '+found.size+' / 3';if(found.size===3)setTimeout(()=>go(3),650)};box.appendChild(b)}}
+shuffleTiles();document.getElementById('songFile').addEventListener('change',e=>{let f=e.target.files[0];if(!f)return;let a=document.getElementById('audio');a.src=URL.createObjectURL(f);document.getElementById('musicStatus').textContent='Selected: '+f.name+' — tap Play / pause.'});
+function toggleMusic(){let a=document.getElementById('audio');if(!a.src){document.getElementById('musicStatus').textContent='Choose an audio file first.';return}if(a.paused)a.play();else a.pause()}
+function confetti(){for(let i=0;i<45;i++){let x=document.createElement('span');x.textContent=['💗','✨','🎉','🌸'][i%4];x.style.position='fixed';x.style.left=Math.random()*100+'vw';x.style.top='-30px';x.style.zIndex=5;x.style.fontSize='22px';x.style.transition='transform 2.2s ease, opacity 2.2s';document.body.appendChild(x);requestAnimationFrame(()=>{x.style.transform=`translateY(${window.innerHeight+80}px) rotate(${Math.random()*500}deg)`;x.style.opacity='0'});setTimeout(()=>x.remove(),2400)}}
+</script>
+</body></html>
